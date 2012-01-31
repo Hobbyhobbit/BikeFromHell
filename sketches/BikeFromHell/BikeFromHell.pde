@@ -17,21 +17,15 @@ ImageWheel    imageWheel;
 float pos1= 0f, pos2= 0f; // grow continuously; +1/turn
 float dpos= 0f; // adapted depending on actual fps
 float delta= 0f;
-int fps= 30; // will be adjusted to actual value
+int fps= 60; // will be adjusted to actual value
 int mstart,lastframe,frames;
 ControlP5 cp5;
 LedMatrix matrix;
-int ledMax=8; // resolution of every LED; e.g. 4 means 2 bits
+int ledMax=16; // resolution of every LED; e.g. 4 means 2 bits
 int ledRed,ledGreen,ledBlue; // active color in matrix
 
 // create new .matrix files : press "d" and copy'n'paste into data/ directory
-String[] dataFiles= new String[] {
-  "_empty.matrix",
-  "atom.matrix",
-  "flower.jpg",
-  "flower2.jpg",
-  "tape_controls.jpg",
-};
+String[] dataFiles;
 
 void setup() {
   size(800,400);
@@ -42,15 +36,16 @@ void setup() {
   cp5.addSlider("delta",0f,.2f, 120,100,10,100);
   
   // file controls
-  /* won't work in applet 
-  File dataDir= new File(dataPath(""));
-  dataFiles= dataDir.listFiles(); //TODO sort
-  */
+  // won't work in applet
+  File dataDir= new File(sketchPath+"/patterns");
+  dataFiles = dataDir.list();
+
   ListBox fileList= cp5.addListBox("fileList", 680,100,100,200);
-  for(int i=0; i<dataFiles.length; i++)
-    fileList.addItem( dataFiles[i],i );
-    //fileList.addItem( dataFiles[i].getName(),i );
-    
+  for(int i=0; i<dataFiles.length; i++){
+    if (dataFiles[i].charAt(0) != '.')
+      fileList.addItem( dataFiles[i],i );
+  }
+  
   // color pickers
   colorSlider("ledRed"  ,#FF0000,  0,290,60,10);
   colorSlider("ledGreen",#00FF00, 80,290,60,10);
