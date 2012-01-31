@@ -3,7 +3,7 @@ import controlP5.*;
 
 int things= 1;
 int leds= 16;
-int resolution= 50; // slots per turn
+int resolution= 100; // slots per turn
 float kmh= 10f; // bicycle speed
 float smear=.5f; // how long lights are visible
 float wheelR=.4f; // wheel radius
