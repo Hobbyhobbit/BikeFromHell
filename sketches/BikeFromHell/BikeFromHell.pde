@@ -2,7 +2,7 @@
 import controlP5.*;
 
 int things= 1;
-int leds= 10;
+int leds= 16;
 int resolution= 50; // slots per turn
 float kmh= 10f; // bicycle speed
 float smear=.5f; // how long lights are visible
@@ -10,7 +10,7 @@ float wheelR=.4f; // wheel radius
 
 final static int RUNNING= 0;
 final static int IMAGING= 1;
-int mode= RUNNING;
+int mode = RUNNING;
 SpinningWheel spinningWheel;
 ImageWheel    imageWheel;
 
@@ -21,7 +21,7 @@ int fps= 30; // will be adjusted to actual value
 int mstart,lastframe,frames;
 ControlP5 cp5;
 LedMatrix matrix;
-int ledMax=4; // resolution of every LED; e.g. 4 means 2 bits
+int ledMax=8; // resolution of every LED; e.g. 4 means 2 bits
 int ledRed,ledGreen,ledBlue; // active color in matrix
 
 // create new .matrix files : press "d" and copy'n'paste into data/ directory
@@ -104,7 +104,7 @@ void draw() {
     mstart= millis();
     fps= frames-lastframe;
     lastframe= frames;
-//    print("fps="+fps+"\n"); //DBG
+    //print("fps="+fps+"\n"); //DBG
     dpos= 1f/fps * kmh/3.6/(2*PI*wheelR);
   }
   

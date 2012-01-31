@@ -27,7 +27,7 @@ void mouseDragged() {
 
 void controlEvent(ControlEvent event) {
   if (event.isGroup()) {
-    String fname= dataFiles[(int) (event.group().value())];
+    String fname = "patterns/" + dataFiles[(int) (event.group().value())];
     // try loading matrix
     if (fname.toLowerCase().substring(fname.length()-7).equals(".matrix")) {
       try {
