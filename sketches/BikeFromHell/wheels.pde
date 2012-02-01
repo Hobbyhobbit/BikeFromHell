@@ -56,14 +56,14 @@ class SpinningWheel extends WheelControl {
   //  line(0,0,cx,cy);
     
     // draw lights
-    for(int i=0; i<leds; i++)
+    for(int i=0; i<matrix.getLeds(); i++)
       {
       // draw as many circles as neccessary to connect to last
       // drawn circle...
       float tmp= lastPos;
       while(tmp<=pos)
       {
-        float ir= (rw - space)*i/leds +15;
+        float ir= (rw - space)*i/matrix.getLeds() +15;
         float mpos= tmp+delta - int(tmp+delta);
         color c= matrix.getColor(i,mpos);
         

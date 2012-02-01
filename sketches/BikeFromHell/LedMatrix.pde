@@ -77,11 +77,10 @@ class LedMatrix {
     
     int dx= mouseX- x;
     int dy= mouseY- y;
+    int row=-1,column=-1; // where mouse is at
     if (interact && dx>0 && dx<w && dy>0 && dy<h) {
-      int column= dx*nx/w;
-      int row= dy*ny/h;
-      fill(medium);
-      rect(x+column*w/nx,y+row*h/ny,w/nx,h/ny);
+      column= dx*nx/w;
+      row= dy*ny/h;
       
       if (mousePressed
           && ((frame-lasti>10) || lastx!=column || lasty!=row)) {
@@ -103,6 +102,8 @@ class LedMatrix {
 //        if (data[i][j] == black)
 //          continue; // keep background color
         fill( lerpColor( data[i][j],black,.3f ) );
+        if (row==i && column==j)
+          fill(bright);
 //        if (data[i][j] == white)
 //          fill(bright); // nicify
         rect(x+j*w/nx,y+i*h/ny,w/nx,h/ny); // make 'active'color
@@ -150,7 +151,10 @@ class LedMatrix {
       String[] cols= split(lines[j+1]," ");
       for(int i=0; i<ny; i++) {
         String[] rgbs= split(cols[i],"-");
-        data[i][j]= color(int(rgbs[0]),int(rgbs[1]),int(rgbs[2]));
+        // auto-crush color
+        //TODO resolution should be specified in .matrix file
+        data[i][j]= colorCrush(
+          color(int(rgbs[0]),int(rgbs[1]),int(rgbs[2])));
       }
     }
   }
