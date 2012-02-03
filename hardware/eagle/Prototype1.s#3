@@ -8200,6 +8200,9 @@ Source: www.kingbright.com</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="108,1,157.48,17.78,+5V,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 </eagle>
