@@ -18,6 +18,7 @@ float pos1= 0f, pos2= 0f; // grow continuously; +1/turn
 float dpos= 0f; // adapted depending on actual fps
 float delta= 0f;
 int fps= 60; // will be adjusted to actual value
+Textlabel fpsLabel;
 int mstart,lastframe,frames;
 ControlP5 cp5;
 LedMatrix matrix;
@@ -55,6 +56,7 @@ void setup() {
   matrix= new LedMatrix("ledCode",ledMax,resolution,leds,0,300,800,100);
   
   // wheel controls
+  fpsLabel= cp5.addTextlabel("fps","?? FPS",760,290);
   spinningWheel= new SpinningWheel( width/2,150,100,20,matrix );
   imageWheel   = new ImageWheel   ( width/2,150,100,20,matrix );
 
@@ -99,7 +101,7 @@ void draw() {
     mstart= millis();
     fps= frames-lastframe;
     lastframe= frames;
-    //print("fps="+fps+"\n"); //DBG
+    fpsLabel.valueLabel().set(fps + " FPS");
     dpos= 1f/fps * kmh/3.6/(2*PI*wheelR);
   }
   
