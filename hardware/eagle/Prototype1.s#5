@@ -7737,21 +7737,22 @@ Source: www.kingbright.com</description>
 <part name="R5" library="rcl" deviceset="R-TRIMM" device="3165W"/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="RED1" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE1" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN1" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE1" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN1" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED2" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE2" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN2" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE2" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN2" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED3" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE3" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN3" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE3" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN3" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED4" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE4" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN4" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE4" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN4" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED5" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE5" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN5" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE5" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN5" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="P+4" library="supply1" deviceset="+5V" device=""/>
+<part name="LED1" library="led" deviceset="LED" device="KA-3528ASYC"/>
 </parts>
 <sheets>
 <sheet>
@@ -7791,6 +7792,7 @@ Source: www.kingbright.com</description>
 <instance part="BLUE5" gate="G$1" x="172.72" y="10.16"/>
 <instance part="GREEN5" gate="G$1" x="165.1" y="12.7"/>
 <instance part="P+4" gate="1" x="185.42" y="86.36"/>
+<instance part="LED1" gate="G$1" x="149.86" y="-2.54"/>
 </instances>
 <busses>
 </busses>
@@ -8200,6 +8202,9 @@ Source: www.kingbright.com</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="108,1,157.48,17.78,+5V,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 </eagle>

@@ -1315,30 +1315,30 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <wire x1="7.78" y1="-3.2" x2="-7.78" y2="-3.2" width="0.2032" layer="51"/>
 <wire x1="7.78" y1="3.7" x2="7.78" y2="-3.2" width="0.2032" layer="51"/>
 <wire x1="7.78" y1="-3.2" x2="7.78" y2="-3.7" width="0.2032" layer="51"/>
-<smd name="2" x="-5.715" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="13" x="6.985" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="1" x="-6.985" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="3" x="-4.445" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="4" x="-3.175" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="14" x="5.715" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="12" x="6.985" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="11" x="5.715" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="6" x="-0.635" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="9" x="3.175" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="5" x="-1.905" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="7" x="0.635" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="10" x="4.445" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="8" x="1.905" y="-4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="15" x="4.445" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="16" x="3.175" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="17" x="1.905" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="18" x="0.635" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="19" x="-0.635" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="20" x="-1.905" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="21" x="-3.175" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="22" x="-4.445" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="23" x="-5.715" y="4.6" dx="0.6" dy="2.2" layer="1"/>
-<smd name="24" x="-6.985" y="4.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="2" x="-5.715" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="13" x="6.985" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="1" x="-6.985" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="3" x="-4.445" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="4" x="-3.175" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="14" x="5.715" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="12" x="6.985" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="11" x="5.715" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="6" x="-0.635" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="9" x="3.175" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="5" x="-1.905" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="7" x="0.635" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="10" x="4.445" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="8" x="1.905" y="-5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="15" x="4.445" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="16" x="3.175" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="17" x="1.905" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="18" x="0.635" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="19" x="-0.635" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="20" x="-1.905" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="21" x="-3.175" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="22" x="-4.445" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="23" x="-5.715" y="5.08" dx="0.635" dy="1.27" layer="1"/>
+<smd name="24" x="-6.985" y="5.08" dx="1.27" dy="0.635" layer="1" rot="R90"/>
 <text x="-6.985" y="1.27" size="1.27" layer="25">cat4016w</text>
 <text x="-6.985" y="-2.54" size="1.27" layer="27">LED-Driver</text>
 <rectangle x1="-7.2301" y1="-5.32" x2="-6.7399" y2="-3.8001" layer="51"/>
@@ -7737,21 +7737,22 @@ Source: www.kingbright.com</description>
 <part name="R5" library="rcl" deviceset="R-TRIMM" device="3165W"/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="RED1" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE1" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN1" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE1" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN1" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED2" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE2" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN2" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE2" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN2" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED3" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE3" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN3" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE3" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN3" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED4" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE4" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN4" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE4" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN4" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="RED5" library="led" deviceset="LED" device="SML0805"/>
-<part name="BLUE5" library="led" deviceset="LED" device="P-LCC-4"/>
-<part name="GREEN5" library="led" deviceset="LED" device="P-LCC-4"/>
+<part name="BLUE5" library="led" deviceset="LED" device="KA-3528ASYC"/>
+<part name="GREEN5" library="led" deviceset="LED" device="KA-3528ASYC"/>
 <part name="P+4" library="supply1" deviceset="+5V" device=""/>
+<part name="LED1" library="led" deviceset="LED" device="KA-3528ASYC"/>
 </parts>
 <sheets>
 <sheet>
@@ -7791,6 +7792,7 @@ Source: www.kingbright.com</description>
 <instance part="BLUE5" gate="G$1" x="172.72" y="10.16"/>
 <instance part="GREEN5" gate="G$1" x="165.1" y="12.7"/>
 <instance part="P+4" gate="1" x="185.42" y="86.36"/>
+<instance part="LED1" gate="G$1" x="149.86" y="-2.54"/>
 </instances>
 <busses>
 </busses>
