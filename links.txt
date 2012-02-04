@@ -2,3 +2,7 @@
 color cycling
   - http://www.effectgames.com/demos/canvascycle/?sound=0
 
+bluetooth modules
+  - http://www.goodluckbuy.com/serial-bluetooth-rf-transceiver-module-rs232.html
+
+
