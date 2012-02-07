@@ -610,8 +610,6 @@
 			<line fill="none" stroke="#000000" stroke-width="2.28" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="392.447" y1="625.467" x2="399.586" y2="607.707"/>
 		
 			<line fill="none" stroke="#000000" stroke-width="2.28" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="396.046" y1="625.467" x2="403.126" y2="607.707"/>
-		
-			<line fill="none" stroke="#000000" stroke-width="2.28" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="399.586" y1="625.467" x2="406.666" y2="607.707"/>
 	</g>
 	<polygon fill="#FFFFFF" points="177.86,761.576 179.797,765.326 181.547,765.764 182.485,766.514 182.985,768.076 183.172,770.389 
 		183.547,778.264 183.36,788.764 182.672,791.139 181.547,792.264 180.172,792.701 179.797,793.014 179.797,794.889 188.61,795.326 
@@ -622,6 +620,8 @@
 		210.86,796.431 215.672,796.681 215.985,785.743 	"/>
 	<rect x="205.268" y="761.142" fill="none" width="214.666" height="54.986"/>
 	<text transform="matrix(1 0 0 1 205.2678 796.1329)" font-family="'RosewoodStd-Regular'" font-size="54" letter-spacing="-2">FH</text>
+	<polygon fill="none" points="714.48,639.764 382.99,639.764 407.605,607.098 739.094,607.098 	"/>
+	<text transform="matrix(0.9377 0 -0.3474 0.9377 402.5071 619.5714)"><tspan x="0" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18">BI</tspan><tspan x="23.869" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18">K</tspan><tspan x="40.986" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18">E F</tspan><tspan x="75.295" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18" letter-spacing="-1.066">R</tspan><tspan x="91.351" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18">OM </tspan><tspan x="135.702" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18" letter-spacing="-1.066">H</tspan><tspan x="152.784" y="0" font-family="'HelveticaNeueLTStd-BlkEx'" font-size="18">ELL</tspan></text>
 </g>
 <g id="Layer_2">
 </g>
