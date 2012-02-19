@@ -5,4 +5,5 @@ color cycling
 bluetooth modules
   - http://www.goodluckbuy.com/serial-bluetooth-rf-transceiver-module-rs232.html
 
-
+SMD LEDs
+  - unicolored, reichelt
