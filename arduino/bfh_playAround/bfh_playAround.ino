@@ -8,8 +8,6 @@
 
 #define LED_n 2
 
-void __cxa_pure_virtual() {}
-
 int LED_i =0;
                              // R G B
  int LED_vals[][5][3] = {    {{ 2,2,2 },    // Valid range: 0...3
@@ -38,6 +36,24 @@ const int pin_set[2][5][3] = { { {  1, 2, 3 },            //
                                  {  8, 9, 7 },          //////
                                  {  6, 5, 4 },          //   //
                                  {  3, 2, 1 } } };      //////        for the bigger currents
+
+void refresh_LEDs(); //FIXME find C dialect that does not need this
+void __cxa_pure_virtual() {} //FIXME make compile not need this
+
+void setup() {
+  pinMode(SIN1,OUTPUT);
+  pinMode(CLK1,OUTPUT);
+  pinMode(LATCH1,OUTPUT);
+  pinMode(SIN2,OUTPUT);
+  pinMode(CLK2,OUTPUT);
+  pinMode(LATCH2,OUTPUT);
+  
+  Serial.begin(9600); 
+  
+  digitalWrite(LATCH1,LOW); digitalWrite(LATCH2,LOW);
+  
+  refresh_LEDs();
+}
 
 void tinynap() {
   delayMicroseconds(100);
@@ -108,22 +124,3 @@ void loop() {
   delay(200);
   LED_i++;
 }
-
-// 10 uS
-
-void setup() {
-  pinMode(SIN1,OUTPUT);
-  pinMode(CLK1,OUTPUT);
-  pinMode(LATCH1,OUTPUT);
-  pinMode(SIN2,OUTPUT);
-  pinMode(CLK2,OUTPUT);
-  pinMode(LATCH2,OUTPUT);
-  
-  Serial.begin(9600); 
-  
-  digitalWrite(LATCH1,LOW); digitalWrite(LATCH2,LOW);
-  
-  refresh_LEDs();
-}
-
-

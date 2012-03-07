@@ -4,6 +4,7 @@ class Prototype1Serializer {
   
   final int SERIAL_TIMEOUT= 3*1000;
   Serial port;
+  boolean flashing= false;
   
   // maps [LED][0=R,1=G,2=B] to LED1..LED16
   int mapA[][]= {
@@ -20,9 +21,13 @@ class Prototype1Serializer {
     {11,12,13},
     {14,15,16}
   };
-  boolean flashing= false;
   
   Prototype1Serializer(int baud) {
+     if (Serial.list().length == 0) {
+       //TODO : test whether right serial port
+       port= null;
+       return;
+     }
      port = new Serial(BikeFromHell.this, Serial.list()[0], baud);
   }
   Prototype1Serializer() {
@@ -31,21 +36,32 @@ class Prototype1Serializer {
   
   class FlashingThread extends Thread {
     
-    int n,vals[];
+    int n,vals[],ms;
     
-    FlashingThread(int n,int vals[]) {
+    FlashingThread(int n,int vals[],int ms) {
       this.n= n;
       this.vals= vals;
+      this.ms= ms;
     }
     
-    void waitFor(int val) {
+    void waitFor(int val) 
+      throws ArduinoCommunicationException {
       long t0= System.currentTimeMillis();
       while (port.available() ==0)
         if ( System.currentTimeMillis()-t0 >SERIAL_TIMEOUT )
-          throw new RuntimeException("timeout ("+SERIAL_TIMEOUT+"ms)");
+          throw new ArduinoCommunicationException("timeout ("+SERIAL_TIMEOUT+"ms)");
       int answer= port.read();
       if (val != answer)
-        throw new RuntimeException("expected "+val+" but received "+answer);
+        throw new ArduinoCommunicationException("expected "+val+" but received "+answer);
+    }
+    
+    class ArduinoCommunicationException extends Exception {
+      ArduinoCommunicationException(String s) {
+        super(s);
+      }
+      
+      @Override
+        public String toString() { return getMessage(); }
     }
       
     public void run() {
@@ -54,19 +70,23 @@ class Prototype1Serializer {
         while (port.available() >0)
           port.read();
           
-        println("waiting for arduino...");
+        print("flashing device : ");
+          
+        print(" n="+n);
         port.write( (byte) n );
         waitFor(n);
+        print(" ms="+ms);
+        port.write( (byte) ms );
+        waitFor(ms);
         
-        print("sending values : ");
         for(int i=0; i<vals.length; i++) {
           port.write(vals[i]);
           waitFor(vals[i]);
           print(" 0x" + String.format("%02X",vals[i]));
         }
-        println(" done");
+        println(" done.");
         
-      } catch (RuntimeException e) {
+      } catch (ArduinoCommunicationException e) {
         println("*** communication error : " + e);
       }
       
@@ -74,11 +94,16 @@ class Prototype1Serializer {
     }
   }
   
-  void flash(LedMatrix lm,final int n) {
+  void flash(LedMatrix lm,final int n,int ms) {
     if (flashing) {
       println("*** still flashing");
       return;
     }
+    if (port == null) {
+      println("*** cannot flash : no device connected");
+      return;
+    }
+    
     int vals[]= new int[2*n];
     for(int i=0; i<n; i++) {
       int val= 0;
@@ -96,7 +121,32 @@ class Prototype1Serializer {
       vals[2*i+1]= val&0xFF;
     }
     flashing= true;
-    FlashingThread ft= new FlashingThread(n,vals);
+    FlashingThread ft= new FlashingThread(n,vals,ms);
     ft.start();
   }
+  
+  void dumpStats() {
+    if (port == null) {
+      println("*** cannot dump stats : no device connected");
+      return;
+    }
+    
+    StringBuffer msg= new StringBuffer();
+    port.write(0);
+    print("arduino stats : ");
+    while(true) {
+      long t0= System.currentTimeMillis();
+      while (port.available() ==0)
+        if ( System.currentTimeMillis()-t0 >SERIAL_TIMEOUT ) {
+          println("*** TIMEOUT");
+          return;
+        }
+      int x= port.read();
+      if (x == '\n')
+        break;
+      msg.append((char) x);
+    }
+    println(msg.toString());
+  }
 }
+

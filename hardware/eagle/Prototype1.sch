@@ -7758,6 +7758,8 @@ Source: www.kingbright.com</description>
 <sheets>
 <sheet>
 <plain>
+<text x="86.36" y="76.2" size="1.778" layer="91">ABOVE on board</text>
+<text x="86.36" y="-33.02" size="1.778" layer="91">BELOW on board</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="30.48" y="43.18"/>
