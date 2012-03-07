@@ -6,17 +6,30 @@
 #define CLK2     3
 #define LATCH2   4
 
-                           // R G B
-const int LED_val[5][3] = { { 0,3,0 },    // Valid range: 0...3
-                            { 3,0,3 },
-                            { 0,0,0 },
-                            { 3,0,3 },
-                            { 3,3,3 } };
+#define LED_n 2
+
+void __cxa_pure_virtual() {}
+
+int LED_i =0;
+                             // R G B
+ int LED_vals[][5][3] = {    {{ 2,2,2 },    // Valid range: 0...3
+                              { 1,1,1 },
+                              { 0,0,0 },
+                              { 0,0,0 },
+                              { 3,3,3 }},
+                            
+                             // R G B
+                             {{ 3,3,3 },    // Valid range: 0...3
+                              { 2,2,2 },
+                              { 1,1,1 },
+                              { 0,0,0 },
+                              { 3,3,3 }}
+                        };
 
 
 const int pin_set[2][5][3] = { { {  1, 2, 3 },            //
                                  {  4, 5, 6 },           ////
-                                 {  7, 9,10 },          //  //
+                                 {  7, 8,10 },          //  //
                                  { 11,12,13 },         ////////
                                  { 14,15,16 } },      ///    ///      for the small currents
                              
@@ -26,34 +39,26 @@ const int pin_set[2][5][3] = { { {  1, 2, 3 },            //
                                  {  6, 5, 4 },          //   //
                                  {  3, 2, 1 } } };      //////        for the bigger currents
 
-void setup() {
-  pinMode(SIN1,OUTPUT);
-  pinMode(CLK1,OUTPUT);
-  pinMode(LATCH1,OUTPUT);
-  pinMode(SIN2,OUTPUT);
-  pinMode(CLK2,OUTPUT);
-  pinMode(LATCH2,OUTPUT);
-  
-  Serial.begin(9600); 
-  
-  digitalWrite(LATCH1,LOW); digitalWrite(LATCH2,LOW);
-  
-  refresh_LEDs();
-}
-
 void tinynap() {
-  delayMicroseconds(1);
+  delayMicroseconds(100);
+  //delay(3);
 }
+ // 100 us -> 230 uS Pulses, tT: 2000 uS
+ // 50 us -> 128 uS Pulses, tT: 1040 uS
+ // 10 us -> 46 uS Pulses, tT: 390 uS
+ // 5 us -> 37 uS Pulses
+ // 1 us -> 29 uS Pulses, tT: 230 uS
 
 void refresh_LEDs(){
   // Mapping
   boolean reg[2][16] = {{0}};
   
   for (int i=0; i<15; i++){
-    reg[0][ pin_set[0][i/3][i%3]-1 ] = LED_val[4-i/3][i%3] % 2;
-    reg[1][ pin_set[1][i/3][i%3]-1 ] = LED_val[4-i/3][i%3] / 2;
+    reg[0][ pin_set[0][i/3][i%3]-1 ] = LED_vals[LED_i %LED_n][4-i/3][i%3] % 2;
+    reg[1][ pin_set[1][i/3][i%3]-1 ] = LED_vals[LED_i %LED_n][4-i/3][i%3] / 2;
   }
   
+#ifdef SERIAL_DEBUG
   // Log:
   Serial.print( "REG0/A: ");
   for (int i=0; i<16; i++){
@@ -65,6 +70,7 @@ void refresh_LEDs(){
     Serial.print( reg[1][i] ); Serial.print(" ");
   }
   Serial.println();
+#endif
   
   // Ship the values!
   for (int i=0; i<16; i++) {
@@ -98,6 +104,26 @@ void refresh_LEDs(){
 }
 
 void loop() {
+  refresh_LEDs();
+  delay(200);
+  LED_i++;
+}
+
+// 10 uS
+
+void setup() {
+  pinMode(SIN1,OUTPUT);
+  pinMode(CLK1,OUTPUT);
+  pinMode(LATCH1,OUTPUT);
+  pinMode(SIN2,OUTPUT);
+  pinMode(CLK2,OUTPUT);
+  pinMode(LATCH2,OUTPUT);
+  
+  Serial.begin(9600); 
+  
+  digitalWrite(LATCH1,LOW); digitalWrite(LATCH2,LOW);
+  
+  refresh_LEDs();
 }
 
 
