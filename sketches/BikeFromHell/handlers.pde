@@ -49,3 +49,7 @@ void controlEvent(ControlEvent event) {
   }
 }
 
+public void flash(int x) {
+  serializer.flash(matrix,resolution);
+}
+

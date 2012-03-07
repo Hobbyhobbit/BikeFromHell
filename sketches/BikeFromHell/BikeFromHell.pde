@@ -2,8 +2,10 @@
 import controlP5.*;
 
 int things= 1;
-int leds= 16;
-int resolution= 100; // slots per turn
+int leds= 5;
+int resolution= 10; // slots per turn
+//int leds= 16;
+//int resolution= 100; // slots per turn
 float kmh= 10f; // bicycle speed
 float smear=.5f; // how long lights are visible
 float wheelR=.4f; // wheel radius
@@ -13,6 +15,7 @@ final static int IMAGING= 1;
 int mode = RUNNING;
 SpinningWheel spinningWheel;
 ImageWheel    imageWheel;
+Prototype1Serializer serializer;
 
 float pos1= 0f, pos2= 0f; // grow continuously; +1/turn
 float dpos= 0f; // adapted depending on actual fps
@@ -29,6 +32,7 @@ int ledRed,ledGreen,ledBlue; // active color in matrix
 String[] dataFiles;
 
 void setup() {
+  println("we ARE:"+this.getClass().toString());
   size(800,400);
   cp5= new ControlP5(this);
   // general parameters
@@ -59,6 +63,10 @@ void setup() {
   fpsLabel= cp5.addTextlabel("fps","?? FPS",760,290);
   spinningWheel= new SpinningWheel( width/2,150,100,20,matrix );
   imageWheel   = new ImageWheel   ( width/2,150,100,20,matrix );
+  
+  // arduino connection
+  serializer= new Prototype1Serializer();
+  cp5.addButton("flash",0,700,290,50,10);
 
   frameRate(fps);
   mstart= millis();
