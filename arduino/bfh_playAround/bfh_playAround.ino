@@ -26,6 +26,9 @@ const int pin_set[2][5][3] = { { {  1, 2, 3 },            //
                                  {  6, 5, 4 },          //   //
                                  {  3, 2, 1 } } };      //////        for the bigger currents
 
+void refresh_LEDs(); //FIXME find C dialect that does not need this
+void __cxa_pure_virtual() {} //FIXME make compile not need this
+
 void setup() {
   pinMode(SIN1,OUTPUT);
   pinMode(CLK1,OUTPUT);

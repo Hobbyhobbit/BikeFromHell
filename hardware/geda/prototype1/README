@@ -1,7 +1,0 @@
-
-contains two CAT4016W led drivers connected to 5x3 SMD LEDs
-on an arduino shield.
-
-one driver draws double the current of the other, thereby
-providing four non-modulated intensity levels for every LED.
-

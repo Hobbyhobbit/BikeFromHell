@@ -13,21 +13,12 @@
 
 int i=0,n=0;
 int ms=100;
+unsigned long micro_start=0,micro_cycle;
 
 #define MAX 100
 int mem[2*MAX];
 
 void __cxa_pure_virtual() {}
-
-void setup() {
-  Serial.begin(9600);
-  pinMode(SINA,OUTPUT);
-  pinMode(CLKA,OUTPUT);
-  pinMode(LATCHA,OUTPUT);
-  pinMode(SINB,OUTPUT);
-  pinMode(CLKB,OUTPUT);
-  pinMode(LATCHB,OUTPUT);
-}
 
 void flashA(int a,int b) {
   int mask;
@@ -56,22 +47,65 @@ void flashA(int a,int b) {
   digitalWrite(LATCHA,HIGH);
   digitalWrite(LATCHA,LOW); 
 }
+void flashB(int a,int b) {
+  int mask;
 
+  mask= 0x80;
+  while(mask != 0) {
+    digitalWrite(CLKB,LOW);
+    if ((mask & a) == 0)
+        digitalWrite(SINB,LOW);
+    else
+        digitalWrite(SINB,HIGH);
+    digitalWrite(CLKB,HIGH);
+    mask >>= 1;
+  }
+  mask= 0x80;
+  while(mask != 0) {
+    digitalWrite(CLKB,LOW);
+    if ((mask & b) == 0)
+        digitalWrite(SINB,LOW);
+    else
+        digitalWrite(SINB,HIGH);
+    digitalWrite(CLKB,HIGH);
+    mask >>= 1;
+  }
 
-void loop_test() {
-  flashA(0xFF,0xFF);
-  delay(500);
+  digitalWrite(LATCHB,HIGH);
+  digitalWrite(LATCHB,LOW); 
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(SINA,OUTPUT);
+  pinMode(CLKA,OUTPUT);
+  pinMode(LATCHA,OUTPUT);
+  pinMode(SINB,OUTPUT);
+  pinMode(CLKB,OUTPUT);
+  pinMode(LATCHB,OUTPUT);
   flashA(0x00,0x00);
-  delay(500);
+  flashB(0x00,0x00);
+
+  // flashing pattern indicates running
+  n=2;
+  mem[0]= 0x00;
+  mem[1]= 0x00;
+  mem[2]= 0xFF;
+  mem[3]= 0xFF;
+  ms= 200;
 }
 
 #define TIMEOUT 1000
+// reads a value within some timeout and acknowledges it
 int timedRead() {
-  int t0= millis();
+  int t0= millis(),ret;
   while(!Serial.available())
     if (millis()-t0 > TIMEOUT)
       return -1;
-  return Serial.read();
+  ret= Serial.read();
+  if (ret>0)
+    Serial.write(ret);
+  return ret;
 }
 
 void loop() {
@@ -79,43 +113,63 @@ void loop() {
   int x;
 
   if (Serial.available()) {
+    // visual feedback
     flashA(0xFF,0xFF);
 
-    x= Serial.read();
-    if (x<=0) {
+    // number of values
+    x= timedRead();
+    if (x==0) {
+      // dump stats
+      Serial.write("n=");
+      Serial.write(n);
+      Serial.write(" us=");
+      Serial.write(micro_cycle);
+      Serial.write("\n");
       flashA(0x00,0x00);
       return;
     }
-    if (x>MAX) {
+    if (x<0) {
+      // some connection error
       flashA(0x00,0x00);
-      Serial.write(MAX);
       return;
     }
+    if (x>MAX)
+      x= MAX;
     n= x;
-    Serial.write(n);
 
-    for(i=0; i<n; i++) {
+    // delay in ms
+    ms= timedRead();
+
+    for(i=0; i<2*n; i++) {
       x= timedRead();
       if (x<0) break;
-      Serial.write(x);
-      mem[i*2]= x;
-
-      x= timedRead();
-      if (x<0) break;
-      Serial.write(x);
-      mem[i*2+1]= x;
+      mem[i]= x;
     }
 
     flashA(0x00,0x00);
   }
 
-  if (i>=n)
+  if (i>=n) {
+    // measure microseconds per cycle
+    if (micro_start >= 0 && micros()<micro_start)
+      micro_cycle= micros()-micro_start;
+    micro_start= micros();
     i=0;
+  }
 
+  // send values
   flashA( mem[2*i],mem[2*i+1] );
   i++;
 
-  delay(ms);
+  if (ms>0)
+    delay(ms);
+}
+
+void loop_test() {
+  flashA(0xFF,0xFF);
+  delay(500);
+  flashA(0x00,0x00);
+  delay(500);
 }
 
 void loop_pixel() {

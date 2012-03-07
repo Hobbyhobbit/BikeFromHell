@@ -7809,8 +7809,8 @@ Source: www.kingbright.com</description>
 <wire x1="7.62" y1="15.24" x2="7.62" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="GND@1"/>
 <wire x1="7.62" y1="27.94" x2="17.78" y2="27.94" width="0.1524" layer="91"/>
-</segment>
-<segment>
+<pinref part="U1" gate="G$1" pin="GND@2"/>
+<wire x1="17.78" y1="30.48" x2="17.78" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="GND@0"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="17.78" y1="25.4" x2="15.24" y2="25.4" width="0.1524" layer="91"/>
@@ -7826,6 +7826,10 @@ Source: www.kingbright.com</description>
 <wire x1="71.12" y1="-25.4" x2="71.12" y2="-27.94" width="0.1524" layer="91"/>
 <junction x="71.12" y="-25.4"/>
 <wire x1="63.5" y1="-25.4" x2="71.12" y2="-25.4" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="27.94" x2="17.78" y2="25.4" width="0.1524" layer="91"/>
+<junction x="17.78" y="27.94"/>
+<junction x="17.78" y="25.4"/>
+<junction x="15.24" y="25.4"/>
 </segment>
 </net>
 <net name="+5V" class="0">

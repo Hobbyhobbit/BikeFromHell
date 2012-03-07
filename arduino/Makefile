@@ -48,7 +48,8 @@ UPLOAD_RATE = 57600
 MCU = atmega328p
 AVRDUDE_PROGRAMMER = stk500v1
 F_CPU = 16000000
-PULSEDTR = python $(dir $(firstword $(MAKEFILE_LIST)))/pulsedtr.py
+PYTHON = /usr/bin/python2
+PULSEDTR = $(PYTHON) $(dir $(firstword $(MAKEFILE_LIST)))/pulsedtr.py
 
 
 ############################################################################
@@ -111,7 +112,7 @@ AVRDUDE_PORT = $(PORT)
 AVRDUDE_WRITE_FLASH = -U flash:w:applet/$(TARGET).hex
 AVRDUDE_FLAGS = -V -F -C $(INSTALL_DIR)/hardware/tools/avrdude.conf \
 -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
--b $(UPLOAD_RATE) -v -v -v -v
+-b $(UPLOAD_RATE) -v #-v -v -v
 # those are :
 #  -V : disable automatic verify check
 #  -F : disable device signature check
