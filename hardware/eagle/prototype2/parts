@@ -1,0 +1,28 @@
+Partlist
+
+Exported from Prototype2.sch at 11.03.12 21:41
+
+EAGLE Version 6.1.0 Copyright (c) 1988-2012 CadSoft
+
+Assembly variant: 
+
+Part     Value               Device              Package            Library    Sheet
+
+C1                           CPOL-EUA/3216-18W   A/3216-18W         rcl        1
+C2                           CPOL-EUA/3216-18W   A/3216-18W         rcl        1
+C3                           CPOL-EUA/3216-18W   A/3216-18W         rcl        1
+LED1     MULTILED_LRTB_G6TG  MULTILED_LRTB_G6TG  P-LCC-6_TOPLED     customized 1
+LED2     MULTILED_LRTB_G6TG  MULTILED_LRTB_G6TG  P-LCC-6_TOPLED     customized 1
+LED3     MULTILED_LRTB_G6TG  MULTILED_LRTB_G6TG  P-LCC-6_TOPLED     customized 1
+LED4     MULTILED_LRTB_G6TG  MULTILED_LRTB_G6TG  P-LCC-6_TOPLED     customized 1
+LED5     MULTILED_LRTB_G6TG  MULTILED_LRTB_G6TG  P-LCC-6_TOPLED     customized 1
+R1       5.6k                R-EU_0204/7         0204/7             rcl        1
+R2       2.2k                R-EU_0204/7         0204/7             rcl        1
+R3       50k                 R-TRIMM3165W        RTRIM3165W         rcl        1
+R4       22k                 R-EU_0204/7         0204/7             rcl        1
+R5       10k                 R-TRIMM3165W        RTRIM3165W         rcl        1
+R6       100k                R-TRIMM3165W        RTRIM3165W         rcl        1
+U$1      CAT4016             CAT4016             SOIC24W            CAT4016    1
+U$2      CAT4016             CAT4016             SOIC24W            CAT4016    1
+U$3      CAT4016             CAT4016             SOIC24W            CAT4016    1
+U1       ARDUINO_SHIELDLABEL ARDUINO_SHIELDLABEL DUEMILANOVE_SHIELD SparkFun   1
