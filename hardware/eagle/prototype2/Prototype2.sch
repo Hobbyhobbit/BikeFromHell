@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -12445,21 +12445,21 @@ Source. OSRAM - LRTB_G6TG.pdf</description>
 <part name="P+1" library="supply1" deviceset="+5V" device=""/>
 <part name="U$3" library="CAT4016" deviceset="CAT4016" device=""/>
 <part name="P+3" library="supply1" deviceset="+5V" device=""/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="0204/7"/>
-<part name="R5" library="rcl" deviceset="R-TRIMM" device="3165W"/>
+<part name="R2" library="rcl" deviceset="R-EU_" device="0204/7" value="2.2k"/>
+<part name="R5" library="rcl" deviceset="R-TRIMM" device="3165W" value="10k"/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="C1" library="rcl" deviceset="CPOL-EU" device="A/3216-18W"/>
 <part name="U$1" library="CAT4016" deviceset="CAT4016" device=""/>
 <part name="P+2" library="supply1" deviceset="+5V" device=""/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="0204/7"/>
-<part name="R3" library="rcl" deviceset="R-TRIMM" device="3165W"/>
+<part name="R1" library="rcl" deviceset="R-EU_" device="0204/7" value="5.6k"/>
+<part name="R3" library="rcl" deviceset="R-TRIMM" device="3165W" value="50k"/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="C2" library="rcl" deviceset="CPOL-EU" device="A/3216-18W"/>
 <part name="U$2" library="CAT4016" deviceset="CAT4016" device=""/>
-<part name="R4" library="rcl" deviceset="R-EU_" device="0204/7"/>
-<part name="R6" library="rcl" deviceset="R-TRIMM" device="3165W"/>
+<part name="R4" library="rcl" deviceset="R-EU_" device="0204/7" value="22k"/>
+<part name="R6" library="rcl" deviceset="R-TRIMM" device="3165W" value="100k"/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="C3" library="rcl" deviceset="CPOL-EU" device="A/3216-18W"/>
