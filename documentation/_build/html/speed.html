@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>About Speed &mdash; Bike From Hell 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Bike From Hell 1 documentation" href="index.html" />
+    <link rel="next" title="Various Notes &amp; Remarks" href="notes.html" />
+    <link rel="prev" title="Information on Hardware-Parts" href="parts.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="notes.html" title="Various Notes &amp; Remarks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="parts.html" title="Information on Hardware-Parts"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Bike From Hell 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="about-speed">
+<h1>About Speed<a class="headerlink" href="#about-speed" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="loading-data-into-leds">
+<h2>Loading Data into LEDs<a class="headerlink" href="#loading-data-into-leds" title="Permalink to this headline">¶</a></h2>
+<p>It is crucial that data is loaded into the <a class="reference internal" href="parts.html#cat4016"><em>CAT4016</em></a> shift
+register fast enough to realize the desired pictures. Especially, if
+<tt class="docutils literal"><span class="pre">PWM</span></tt> is to work properly, the shift registers must be loaded
+fast enough that every &#8220;pixel&#8221; actually achieves the desired <tt class="docutils literal"><span class="pre">PWM</span></tt>
+resolution.</p>
+<p>The following examples were calculated by  <a class="reference download internal" href="_downloads/speed_PWM.py"><tt class="xref download docutils literal"><span class="pre">a</span> <span class="pre">python</span> <span class="pre">script</span></tt></a></p>
+<blockquote>
+<div><ul class="simple">
+<li>16 RGB LEDs with <tt class="docutils literal"><span class="pre">4bit</span> <span class="pre">PWM</span></tt> need a shift-register update-rate
+of <tt class="docutils literal"><span class="pre">0.78</span> <span class="pre">MHz</span></tt> at <tt class="docutils literal"><span class="pre">30km/h</span></tt></li>
+</ul>
+</div></blockquote>
+<div class="section" id="arduino-bit-banging">
+<h3>arduino-bit-banging<a class="headerlink" href="#arduino-bit-banging" title="Permalink to this headline">¶</a></h3>
+<p>bit-banging the values manually to the digital I/O port using the
+library function <cite>digitalWrite</cite></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">16</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CLK1</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CLK2</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+  <span class="n">tinynap</span><span class="p">();</span>
+
+  <span class="c1">// Faint LEDs</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">reg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">SIN2</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">SIN2</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Bright LEDs</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">reg</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">SIN1</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">SIN1</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CLK1</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span> <span class="n">digitalWrite</span><span class="p">(</span><span class="n">CLK2</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">tinynap</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>even before considering the generated assembler code, it becomes
+obvious pretty fast that this is not a particularly efficient
+implementation; let&#8217;s first have a look at the implementation of
+<cite>digitalWrite</cite> which can be found in <cite>$CORE/wiring_digital.c</cite></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">digitalWrite</span><span class="p">(</span><span class="n">uint8_t</span> <span class="n">pin</span><span class="p">,</span> <span class="n">uint8_t</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">uint8_t</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">digitalPinToTimer</span><span class="p">(</span><span class="n">pin</span><span class="p">);</span>
+  <span class="n">uint8_t</span> <span class="n">bit</span> <span class="o">=</span> <span class="n">digitalPinToBitMask</span><span class="p">(</span><span class="n">pin</span><span class="p">);</span>
+  <span class="n">uint8_t</span> <span class="n">port</span> <span class="o">=</span> <span class="n">digitalPinToPort</span><span class="p">(</span><span class="n">pin</span><span class="p">);</span>
+  <span class="k">volatile</span> <span class="n">uint8_t</span><span class="o">*</span> <span class="n">out</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">port</span> <span class="o">==</span> <span class="n">NOT_A_PIN</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="c1">// If the pin that support PWM output, we need to turn it off</span>
+  <span class="c1">// before doing a digital write.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">timer</span> <span class="o">!=</span> <span class="n">NOT_ON_TIMER</span><span class="p">)</span> <span class="n">turnOffPWM</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span>
+
+  <span class="n">out</span> <span class="o">=</span> <span class="n">portOutputRegister</span><span class="p">(</span><span class="n">port</span><span class="p">);</span>
+
+  <span class="n">uint8_t</span> <span class="n">oldSREG</span> <span class="o">=</span> <span class="n">SREG</span><span class="p">;</span>
+  <span class="n">cli</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="n">LOW</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span> <span class="n">out</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">bit</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">*</span> <span class="n">out</span> <span class="o">|</span> <span class="o">=</span> <span class="n">bit</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">SREG</span> <span class="o">=</span> <span class="n">oldSREG</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>all these tests are obviously not necessary if you know what you&#8217;re
+doing; the above code translates to 55 assembler instructions that
+are executed every time the output pin is set/cleared...</p>
+</div>
+<div class="section" id="iterating-through-const-int">
+<h3>iterating through const int[][][]<a class="headerlink" href="#iterating-through-const-int" title="Permalink to this headline">¶</a></h3>
+<p>before every write the array is &#8220;translated&#8221; in a nested for-loop</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">15</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="n">reg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span> <span class="n">pin_set</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span> <span class="o">=</span> <span class="n">LED_val</span><span class="p">[</span><span class="mi">4</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">reg</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pin_set</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span> <span class="o">=</span> <span class="n">LED_val</span><span class="p">[</span><span class="mi">4</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>only the implementation of the loop translates to 83 instructions;
+moreover, the <cite>i/3</cite> and <cite>i%3</cite> cannot be calculated directly by
+the AVR, but are implemented by the compiler that performs a quite
+tedious nested algorithm each time...</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">About Speed</a><ul>
+<li><a class="reference internal" href="#loading-data-into-leds">Loading Data into LEDs</a><ul>
+<li><a class="reference internal" href="#arduino-bit-banging">arduino-bit-banging</a></li>
+<li><a class="reference internal" href="#iterating-through-const-int">iterating through const int[][][]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="parts.html"
+                        title="previous chapter">Information on Hardware-Parts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="notes.html"
+                        title="next chapter">Various Notes &amp; Remarks</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/speed.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="notes.html" title="Various Notes &amp; Remarks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="parts.html" title="Information on Hardware-Parts"
+             >previous</a> |</li>
+        <li><a href="index.html">Bike From Hell 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andreas Steiner, Matthias Roggo.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
