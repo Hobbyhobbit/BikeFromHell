@@ -15,7 +15,7 @@ resolution.
 
 The following examples were calculated by  :download:`a python script <scripts/speed_PWM.py>`
 
-  - 16 RGB LEDs with ``4bit PWM`` need a shift-register update-rate
+  - ``16 RGB`` LEDs with ``4bit PWM`` need a shift-register update-rate
     of ``0.78 MHz`` at ``30km/h``
 
 
