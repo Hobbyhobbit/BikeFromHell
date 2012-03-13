@@ -27,19 +27,19 @@ potentiometer   1         ???     3165
 Prototype v2
 ------------
 
-=============   ======    =====   ==========   ==========
-part            number    value   footprint    remarks
-=============   ======    =====   ==========   ==========
-Multi-LED       5         RGB     P-LCC-6       
-capacitor       3         ?       A/3216-18W
-resistor        1         2.2k    0204/7
-resistor        1         5.6k    0204/7
-resistor        1         22k     0204/7
-trimm resistor  1         10k     RTRIM3165W
-trimm resistor  1         50k     RTRIM3165W
-trimm resistor  1         100k    RTRIM3165W
-CAT4016         3         ?       SOIC24W      LED-Driver
-=============   ======    =====   ==========   ==========
+==============   ======    =====   ==========   ==========
+part             number    value   footprint    remarks
+==============   ======    =====   ==========   ==========
+Multi-LED        5         RGB     P-LCC-6       
+capacitor        3         ?       A/3216-18W
+resistor         1         2.2k    0204/7
+resistor         1         5.6k    0204/7
+resistor         1         22k     0204/7
+trimm resistor   1         10k     RTRIM3165W
+trimm resistor   1         50k     RTRIM3165W
+trimm resistor   1         100k    RTRIM3165W
+CAT4016          3         ?       SOIC24W      LED-Driver
+==============   ======    =====   ==========   ==========
 
 
 Details from Datasheets
