@@ -339,8 +339,8 @@ UsedLibrary="customized.lbr"
 
 [Win_1]
 Type="Schematic Editor"
-Loc="283 46 1207 673"
-State=2
+Loc="320 218 919 617"
+State=0
 Number=2
 File="/Users/maroggo/Documents/ETHz/USBasp Key/hardware/usbasp.sch"
 View="-5.73116 -4.10556 265.873 182.968"
