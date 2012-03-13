@@ -14,7 +14,7 @@ where to buy
 
 the pinout of the board as advertised on `Goodluck Buy <http://www.goodluckbuy.com/serial-bluetooth-rf-transceiver-module-rs232.html>`_
 
-..img 
+.. image:: imgs/goodluck_pinout.png
 
 +-----+----------+
 | PIN | function |
@@ -56,4 +56,5 @@ some blogs about it
       - change name (20 characters)
       - set PIN (``1234`` by default)
   - `Zonemike'ls Blog <http://www.zonemikel.com/wordpress/?p=788>`_
-    - 
+  - `A Russian blog <http://microsin.ru/content/view/1284/44/>`_
+
