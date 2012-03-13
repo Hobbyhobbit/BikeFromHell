@@ -23,11 +23,16 @@ potentiometer   1         ???     3165
 potentiometer   1         ???     3165
 =============   ======    =====   =========   =======
 
+.. todo::
+
+  update values/footprints for prototype v1 board
 
 Prototype v2
 ------------
 
-*TODO*
+.. todo::
+
+  add part list for prototype v2 board
 
 
 Details from Datasheets

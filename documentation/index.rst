@@ -14,14 +14,12 @@ on required hardware, implementation details, design guidelines etc...
 
    parts.rst
    speed.rst
+   bluetooth.rst
    notes.rst
 
 
 
-Indices and tables
-==================
+TODO
+====
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+.. todolist::

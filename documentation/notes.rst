@@ -3,6 +3,18 @@
 Various Notes & Remarks
 ***********************
 
+The Other Guys
+==============
+
+Adafruit SpokePOV
+-----------------
+
+some data from `their product website <http://www.adafruit.com/products/5>`_ (v1.1)
+
+  - 60 LEDs, double-sided
+  - $37.50 for the kit (additional $7.50 for the dongle and $2.50 for the magnet)
+  - 4k memory, can save four custom images
+
 
 Dimension Circuit Parameters
 ============================

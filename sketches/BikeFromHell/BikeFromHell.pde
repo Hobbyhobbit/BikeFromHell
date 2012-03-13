@@ -25,14 +25,13 @@ Textlabel fpsLabel;
 int mstart,lastframe,frames;
 ControlP5 cp5;
 LedMatrix matrix;
-int ledMax=8; // resolution of every LED; e.g. 4 means 2 bits
+int ledMax=4; // resolution of every LED; e.g. 4 means 2 bits
 int ledRed,ledGreen,ledBlue; // active color in matrix
 
 // create new .matrix files : press "d" and copy'n'paste into data/ directory
 String[] dataFiles;
 
 void setup() {
-  println("we ARE:"+this.getClass().toString());
   size(800,400);
   cp5= new ControlP5(this);
   // general parameters

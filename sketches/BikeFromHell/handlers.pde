@@ -17,7 +17,7 @@ void keyTyped() {
     matrix.dumpData();
     
   if (key == 'x')
-  serializer.dumpStats();
+    serializer.dumpStats();
 }
 
 void mousePressed() {
@@ -53,7 +53,7 @@ void controlEvent(ControlEvent event) {
 }
 
 public void flash(int x) {
-  int ms= int(resolution * kmh/3.6/(2*PI*wheelR));
+  int ms= int(1000/(resolution* kmh/3.6/(2*PI*wheelR)));
   serializer.flash(matrix,resolution,ms);
 }
 

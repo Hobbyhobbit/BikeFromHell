@@ -6,21 +6,28 @@ class Prototype1Serializer {
   Serial port;
   boolean flashing= false;
   
-  // maps [LED][0=R,1=G,2=B] to LED1..LED16
-  int mapA[][]= {
-    {16,15,14},
+  // maps [CAT][LED][0=R,1=G,2=B] to LED1..LED16 (NOT starting at zero !)
+  // CAT=0 is for weak currents ("A")
+  // CAT=1 is for more current  ("B")
+  // LEDs numbered top->down (with USB connector below)
+  // => 16bit will be shifted MSB, A before B
+  int maps[][][]= {
+    
+   {{1,2,3},
+    {4,5,6},
+    {7,9,10},
+    {11,12,13},
+    {14,15,16}}, // last row not tested
+    
+   {{16,15,14},
     {13,12,11},
     {9,8,7},
     {6,5,4},
-    {3,2,1}
+    {3,2,1}} // last row not tested
   };
-  int mapB[][]= {
-    {1,2,3},
-    {4,5,6},
-    {7,8,10},
-    {11,12,13},
-    {14,15,16}
-  };
+  // when value is GREATER (not equal!) than lims[bit], the corresponding
+  // channel will be activated
+  int lims[]= {0,0x80};
   
   Prototype1Serializer(int baud) {
      if (Serial.list().length == 0) {
@@ -31,7 +38,7 @@ class Prototype1Serializer {
      port = new Serial(BikeFromHell.this, Serial.list()[0], baud);
   }
   Prototype1Serializer() {
-    this(9600);
+    this(2400);
   }
   
   class FlashingThread extends Thread {
@@ -75,6 +82,9 @@ class Prototype1Serializer {
         print(" n="+n);
         port.write( (byte) n );
         waitFor(n);
+        
+        if (ms>255)
+          ms=255;
         print(" ms="+ms);
         port.write( (byte) ms );
         waitFor(ms);
@@ -95,6 +105,7 @@ class Prototype1Serializer {
   }
   
   void flash(LedMatrix lm,final int n,int ms) {
+    println("led(0)>>16=" + String.format("0x%02X",(lm.getColor(0,0)>>16) & 0xFF));
     if (flashing) {
       println("*** still flashing");
       return;
@@ -104,22 +115,36 @@ class Prototype1Serializer {
       return;
     }
     
-    int vals[]= new int[2*n];
+    // n slots times number of channels times two (16bit)
+    int vals[]= new int[2*maps.length*n];
     for(int i=0; i<n; i++) {
-      int val= 0;
+      int val[]= {0,0};
+      
       for(int j=0; j<lm.getLeds(); j++) {
         color c= lm.getColor(j,((float) i)/n);
-        if (red(c) != 0)
-          val |= (1 << (mapA[j][0]));
-        if (green(c) != 0)
-          val |= (1 << (mapA[j][1]));
-        if (blue(c) != 0)
-          val |= (1 << (mapA[j][2]));
+        for(int bit=0; bit<val.length; bit++) {
+          
+          //red
+          if (((c>>16) & 0xFF) >lims[bit])
+            val[bit] |= (1 << (maps[bit][j][0] -1));
+          
+          //green
+          if (((c>> 8) & 0xFF) >lims[bit])
+            val[bit] |= (1 << (maps[bit][j][1] -1));
+            
+          //blue
+          if (((c>> 0) & 0xFF) >lims[bit])
+            val[bit] |= (1 << (maps[bit][j][2] -1));
+        }
       }
-      // LED16 is first bit shifted
-      vals[2*i]= (val&0xFF)>>8;
-      vals[2*i+1]= val&0xFF;
+      // fill in MSB
+      for(int bit=0; bit<val.length; bit++) {
+        vals[2*maps.length*i+2*bit   ]= (val[bit]&0xFF00)>>8;
+        vals[2*maps.length*i+2*bit +1]=  val[bit]&0x00FF;
+      }
     }
+    
+    // ship the values
     flashing= true;
     FlashingThread ft= new FlashingThread(n,vals,ms);
     ft.start();
