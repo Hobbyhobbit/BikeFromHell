@@ -6,6 +6,7 @@ Various Notes & Remarks
 The Other Guys
 ==============
 
+
 Adafruit SpokePOV
 -----------------
 
@@ -14,6 +15,23 @@ some data from `their product website <http://www.adafruit.com/products/5>`_ (v1
   - 60 LEDs, double-sided
   - $37.50 for the kit (additional $7.50 for the dongle and $2.50 for the magnet)
   - 4k memory, can save four custom images
+
+
+RGBike POV (Instructables)
+--------------------------
+
+see `RGBike POV <http://www.instructables.com/id/RGBike-POV-Open-project/>`_
+
+  - uses :ref:`TLC5940`
+
+
+Monkey Electric
+---------------
+
+  - (discontinued) `m133s <http://www.monkeylectric.com/m133s-discontinued/>`_
+  - the professional `m464q <http://www.monkeylectric.com/video_pro_wheel_screen/>`_
+    system : very expensive, displays video and has wireless channel; available
+    Mai 2012
 
 
 Dimension Circuit Parameters
