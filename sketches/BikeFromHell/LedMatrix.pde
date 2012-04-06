@@ -77,17 +77,17 @@ class LedMatrix {
     
     int dx= mouseX- x;
     int dy= mouseY- y;
+    boolean hover = false;
     int row=-1,column=-1; // where mouse is at
     if (interact && dx>0 && dx<w && dy>0 && dy<h) {
       column= dx*nx/w;
       row= dy*ny/h;
+      hover = true;
       
       if (mousePressed
           && ((frame-lasti>10) || lastx!=column || lasty!=row)) {
         if (mouseButton == LEFT)
-          data[row][column]= color(255*ledRed  /ledMax,
-                                   255*ledGreen/ledMax,
-                                   255*ledBlue /ledMax);
+          data[row][column]= cp.getColor();
         else
           data[row][column]= black;
 
@@ -101,9 +101,13 @@ class LedMatrix {
       for(int j=0; j<nx; j++) {
 //        if (data[i][j] == black)
 //          continue; // keep background color
-        fill( lerpColor( data[i][j],black,.3f ) );
+        if (hover) {
+          fill( lerpColor( data[i][j],black,.0f ) );
+        } else {
+          fill( lerpColor( data[i][j],black,.5f ) );
+        }
         if (row==i && column==j)
-          fill(bright);
+          fill(cp.getColor());
 //        if (data[i][j] == white)
 //          fill(bright); // nicify
         rect(x+j*w/nx,y+i*h/ny,w/nx,h/ny); // make 'active'color

@@ -51,9 +51,7 @@ void setup() {
   }
   
   // color pickers
-  colorSlider("ledRed"  ,#FF0000,  0,290,60,10);
-  colorSlider("ledGreen",#00FF00, 80,290,60,10);
-  colorSlider("ledBlue" ,#0000FF,160,290,60,10);
+  cp = new ColorPicker( 10, 10, 200, 200, 255 );
   
   // led matrix
   matrix= new LedMatrix("ledCode",ledMax,resolution,leds,0,300,800,100);
@@ -100,7 +98,8 @@ void draw() {
     matrix.setInteract(true);
   }
   
-  // draw matrix in both cases
+  // draw matrix and colorpicker in both cases
+  cp.render();
   matrix.draw();
   
   // calculate frame count and do speed->pos conversion
