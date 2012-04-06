@@ -58,3 +58,13 @@ some blogs about it
   - `Zonemike'ls Blog <http://www.zonemikel.com/wordpress/?p=788>`_
   - `A Russian blog <http://microsin.ru/content/view/1284/44/>`_
 
+
+Bluetooth Communication
+=======================
+
+links
+
+  - `Android + Processing + Bluetooth (oscar) <http://webdelcire.com/wordpress/archives/1045>`_
+  - `Amarino <http://www.amarino-toolkit.net/index.php/getting-started.html>`_
+  - `BlueCove <http://www.bluecove.org/>`_
+  - 

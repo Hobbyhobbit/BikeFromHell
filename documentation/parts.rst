@@ -63,6 +63,22 @@ Prototype v2
 Details from Datasheets
 =======================
 
+.. _TLC5940:
+
+TLC5940
+-------
+
+:download:`download datasheet <datasheets/TLC5940.pdf>`
+
+
+  - 16 channels
+  - 12 bit PWM control
+  - up to 30 MHz
+  - serial data interface
+  - drives up to 60 mA
+
+
+
 .. _CAT4016:
 
 CAT4016
@@ -86,6 +102,20 @@ the current *on each pin* is equal to 50x the current drawn from
 pin ``RSET`` -- see :ref:`calculating-cat4016-current`
 
 
+Other Microcontrollers From Atmel
+---------------------------------
+
+  - `AT32UC3B064 <http://ch.farnell.com/atmel/at32uc3b064-a2ut/mcu-32bit-64k-flash-uc3b-64qfp/dp/1841641>`_
+
+    - 16k SRAM
+    - 10 sfr
+
+  - `ATXMEGA192A3U <http://ch.farnell.com/atmel/atxmega192a3u-au/mcu-8bit-avr-64tqfp/dp/2066303?in_merch=New%20Products>`_
+
+    - 16k SRAM
+    - 13 sfr
+
+
 .. _ATMEGA328P:
 
 ATMEGA328P
@@ -105,18 +135,22 @@ CPU :
 accessing memory :
 
   - program memory (10k+ cycles)
+
     - boot-loader (highest addresses), application memory
     - 32k 
     - e.g. constants accessed via `LPM` instruction
+
   - data memory
+
     - 2k
-    - 0000-001F : GP registers
-    - 0020-005F : i/o registers (`IN`, `OUT` instructions)
-    - 0060-00FF : extended i/o registers (`ST/STS/STD`, `LD/LDS/LDT` instructions)
-    - 0100-08FF : internal SRAM
+    - ``0000-001F`` : GP registers
+    - ``0020-005F`` : i/o registers (`IN`, `OUT` instructions)
+    - ``0060-00FF`` : extended i/o registers (`ST/STS/STD`, `LD/LDS/LDT` instructions)
+    - ``0100-08FF`` : internal SRAM
     - direct addressing : entire space
     - indirect addressing : Y/Z-reg + 63 bytes
     - accessed in two cycles
+
   - EEPROM (100k+ cycles)
     - 1k
 
@@ -124,8 +158,10 @@ interrupts :
 
   - every interrupt must be enabled in status register
   - interrupt vector : 0000-0067 (26x 4 bytes)
+
     - the lower the addresse the higher the priority (RESET, INT0, INT1, ...)
     - 26 vectors, each 2 words (4 bytes)
+
   - global flag cleared when interrupt executed; set on `RETI`
   - on hardware interrupt corresponding interrupt disabled
   - interrupts remembered (flags set) when global/specific disabled; executed
@@ -134,6 +170,7 @@ interrupts :
     disappeared before flags re-enabled
   - always >=1 instruction between two interrupts
   - SR must be (re-) stored in ISR
+  - timing : 4+3 instructions before ISR execution, 4 instructions on return
 
 
 LEDs
