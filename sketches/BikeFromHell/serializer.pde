@@ -35,7 +35,12 @@ class Prototype1Serializer {
        port= null;
        return;
      }
-     port = new Serial(BikeFromHell.this, Serial.list()[0], baud);
+     try{
+       port = new Serial(BikeFromHell.this, Serial.list()[0], baud);
+     } catch( Exception e ) {
+       port = null;
+       println("Can't establish connection. Offline mode.");
+     }
   }
   Prototype1Serializer() {
     this(2400);

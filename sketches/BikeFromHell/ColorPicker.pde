@@ -104,7 +104,7 @@ public class ColorPicker
     noFill(); stroke(0); strokeWeight(2);
     ellipse(cX, cY, 8, 8);
     fill( c ); noStroke();
-    rect( x+w, y, 20, h );
+    rect( x, y+h, w, 20 );
   }
   
   public int getColor()

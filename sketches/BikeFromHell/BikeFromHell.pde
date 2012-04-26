@@ -1,4 +1,3 @@
-
 import controlP5.*;
 
 int things= 1;
@@ -35,9 +34,9 @@ void setup() {
   size(800,400);
   cp5= new ControlP5(this);
   // general parameters
-  cp5.addSlider("kmh"  ,0f,30f, 20,100,10,100);
-  cp5.addSlider("smear",0f, 1f,  70,100,10,100);
-  cp5.addSlider("delta",0f,.2f, 120,100,10,100);
+  cp5.addSlider("kmh"  ,0f,30f, 560,100,10,100);
+  cp5.addSlider("smear",0f, 1f, 600,100,10,100);
+  cp5.addSlider("delta",0f,.2f, 640,100,10,100);
   
   // file controls
   // won't work in applet
@@ -51,7 +50,7 @@ void setup() {
   }
   
   // color pickers
-  cp = new ColorPicker( 10, 10, 200, 200, 255 );
+  cp = new ColorPicker( 20, 60, 200, 200, 255 );
   
   // led matrix
   matrix= new LedMatrix("ledCode",ledMax,resolution,leds,0,300,800,100);
