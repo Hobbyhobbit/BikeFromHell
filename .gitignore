@@ -4,4 +4,9 @@
 *.swp
 *.b#*
 *.s#*
+*.hex
+*.o
+*.elf
+a.out
+tags
 _build/
