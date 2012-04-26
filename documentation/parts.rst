@@ -121,7 +121,7 @@ Other Microcontrollers From Atmel
 ATMEGA328P
 -----------
 
-:download:`download datasheet <datasheets/CAT4016.pdf>`
+:download:`download datasheet <datasheets/ATMEGA328P.pdf>`
 
 you might also want to have a look at the
 :download:`arduino duemilanove schematics <datasheets/arduino-duemilanove-schematic.pdf>`

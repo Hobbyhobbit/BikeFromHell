@@ -38,7 +38,37 @@ class Prototype1Serializer {
      port = new Serial(BikeFromHell.this, Serial.list()[0], baud);
   }
   Prototype1Serializer() {
-    this(2400);
+    this(57600);
+  }
+  
+  
+  /**
+   * new protocol implementation for improved speed. sends all values
+   * directly without waiting for a response. in case some values are
+   * not received correctly, an error will be generated that is handled
+   * in the serial callback...
+   */
+  class NewFlashingThread extends Thread {
+    
+    int n,ms,vals[];
+    
+    NewFlashingThread(int n,int vals[],int ms) {
+      this.n= n;
+      this.ms= ms;
+      this.vals= vals;
+    }
+    
+    public void run() {
+      port.write((byte) 0); // enter binary mode
+      port.write((byte) n); // first send number of slots (8bit)
+      port.write((byte) ms >> 8); // then send MSB of delay
+      port.write((byte) ms & 0xFF); // then send LSB of delay
+      for(int i=0; i<vals.length; i++)
+        port.write((byte) vals[i]); // finally send values
+      println("DONE flashing ("+vals.length+" values)");
+      flashing= false;
+    }
+    
   }
   
   class FlashingThread extends Thread {
@@ -146,7 +176,7 @@ class Prototype1Serializer {
     
     // ship the values
     flashing= true;
-    FlashingThread ft= new FlashingThread(n,vals,ms);
+    NewFlashingThread ft= new NewFlashingThread(n,vals,ms);
     ft.start();
   }
   
