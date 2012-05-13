@@ -87,12 +87,30 @@ TLC5940
 :download:`download datasheet <datasheets/TLC5940.pdf>`
 
 
+  - `TCL5940 at farnell`_
   - 16 channels
   - 12 bit PWM control
-  - up to 30 MHz
-  - serial data interface
-  - drives up to 60 mA
+  - serial data interface (30 MHz data transfer rate)
+  - drives up to 60 mA (with VCC<3.5 V) -- up to 120 mA (3.5<VCC<5 V)
+  - error detection : open LED, thermal
+  - reference current : ``IREF`` fixed to 1.24 V; multiplied with 31.5
+  - voltage drop 0.5 V for 40 mA output current
+  - linear dot correction (6bit for each channel)
+  - serial interface
 
+    - reads data on raising SCLK
+    - MSB first, OUT15 first -- 192 bits for output registers
+      ("GS mode" for grayscale)
+    - XLAT high pulse latches data to output registers
+    - VPRG=1 to set dot correction values ("DC mode") -- 96 bits
+    - after XLAT pulse, internal SR is set with status information
+      (LOD data, TEF data, DC values) -- can be read out via sout
+      
+  - GSCLK must be clocked externally; BLANK must be pulled high every
+    4096 cycles to reset internal PWM counter -- else all outputs
+    turn off
+
+.. _TCL5940 at farnell: http://ch.farnell.com/texas-instruments/tlc5940pwp/led-treiberr-pwm-control-28-tssop/dp/1755256
 
 
 .. _CAT4016:

@@ -1,0 +1,20 @@
+Element(0x00 "HC Serial Bluetooth Board" "X0" "" 0 0
+		0 0 2 100 0x00)
+(
+
+!Rectangle(0,0,15mm,28mm,1)
+
+!set('dx',1.666mm)
+!set('dy',1.666mm)
+!set('padwidth',1.25mm)
+!set('inner',1mm-padwidth/2)
+!set('outer',1.5mm-padwidth/2)
+
+!Pads(1,13,0mm-outer,6.3mm,0mm+inner,6.3mm,0,dy)
+
+!Pads(14,8,dx,28mm-inner,dx,28mm+outer,dx,0)
+
+!Pads(22,13,15mm-inner,28mm-dy,15mm+outer,28mm-dy,0,-dy)
+
+)
+
