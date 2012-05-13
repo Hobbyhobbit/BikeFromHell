@@ -10,3 +10,8 @@
 a.out
 tags
 _build/
+*.pcb-
+PCB*.backup
+*.bak
+applet/
+*.fp-
