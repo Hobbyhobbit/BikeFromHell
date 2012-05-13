@@ -95,8 +95,6 @@ T 41100 51700 5 10 0 0 0 6 1
 device=CONNECTOR_6
 T 42800 51900 5 10 1 1 0 6 1
 refdes=J4
-T 42900 49900 5 10 0 1 0 0 1
-footprint=JUMPER6
 }
 C 47500 49900 1 0 1 EMBEDDEDconnector6-1.sym
 [
@@ -183,8 +181,6 @@ T 45700 51700 5 10 0 0 0 6 1
 device=CONNECTOR_6
 T 47400 51900 5 10 1 1 0 6 1
 refdes=J2
-T 47500 49900 5 10 0 1 0 0 1
-footprint=JUMPER6
 }
 C 47500 46500 1 0 1 EMBEDDEDconnector8-1.sym
 [
@@ -299,8 +295,6 @@ T 47400 49700 5 10 0 0 0 6 1
 device=CONNECTOR_8
 T 47400 49100 5 10 1 1 0 6 1
 refdes=J3
-T 47500 46500 5 10 0 1 0 0 1
-footprint=JUMPER8
 }
 C 42900 46500 1 0 1 EMBEDDEDconnector8-1.sym
 [
@@ -415,8 +409,6 @@ T 42800 49700 5 10 0 0 0 6 1
 device=CONNECTOR_8
 T 42800 49100 5 10 1 1 0 6 1
 refdes=J1
-T 42900 46500 5 10 0 1 0 0 1
-footprint=JUMPER8
 }
 C 44300 46600 1 0 0 EMBEDDEDnc-left-1.sym
 [
@@ -688,12 +680,7 @@ value=NoConnection
 T 39900 47700 5 10 0 0 0 0 1
 device=DRC_Directive
 }
-T 35100 39700 9 10 1 0 0 0 4
-v.0 :: Oct. 2009
-Initial release
-
-
-B 34900 40000 3800 900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+B 34900 40000 3200 800 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
 C 44300 50600 1 0 0 EMBEDDEDnc-left-1.sym
 [
 T 44300 51600 8 10 0 0 0 0 1
@@ -1326,3 +1313,7 @@ T 46100 51700 9 10 1 0 0 0 1
 PC0..PC5
 T 46100 48900 9 10 1 0 0 0 1
 PB0..PB5
+T 35100 40100 9 10 1 0 0 0 3
+NO FOOTPRINT because elements
+already defined in
+arduino-shield.pcb
