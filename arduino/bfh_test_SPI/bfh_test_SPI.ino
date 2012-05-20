@@ -2,17 +2,17 @@
 
 #include <SPI.h>
 
-// the pin to which both latches are connected
-#define LATCH 11
+// the pin to which all three latches are connected
+#define LATCH 9 //Prototype2
 
-/* the two shift registers are daisy-chained with the
+/* the three shift registers are daisy-chained with the
  * "weak" current being connected direclty to the shield
  * therefore responding to the second byte written to the
  * SPI -- within each register, the MSB is written first
  * therefore the higher bits correspond to the higher
  * port names */
 
-#define SPI_BYTES 2
+#define SPI_BYTES 6
 // only use one register
 /*
 const uint8_t[] data={
@@ -33,25 +33,58 @@ void setup() {
 
 // this should take approximately
 // 4*8/8MHz*length *.15 == 6us *length
-void flash_series(const uint8_t *ptr,int length,int delay_usec) 
+void flash_series(const uint8_t *ptr, int length, int delay_msec) 
 {
   while(length-- >0) {
-    SPI.transfer( *ptr++ );
-    SPI.transfer( *ptr++ );
-    SPI.transfer( *ptr++ );
-    SPI.transfer( *ptr++ );
+    for(int i=0; i<SPI_BYTES; i++)
+      SPI.transfer( *ptr++ );
+    
+    digitalWrite(LATCH,HIGH);
+    digitalWrite(LATCH,LOW);
 
-    delayMicroseconds(delay_usec);
+    delay(delay_msec);
   }
 }
 
 const uint8_t on_off[]={
   0xFF,0xFF,0x00,0x00,
+  0xFF,0x00,0x00,0x00,
   0xFF,0x00,0x00,0x00
 };
 const uint8_t all_off[]={
   0x00,0x00,0x00,0x00
 };
+
+const uint8_t blinken[]={
+  0x00,0x00,0x00,0x00,0x00,0x00,
+  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
+};
+
+const uint8_t drivers[]={
+  0xFF,0xFF,0x00,0x00,0x00,0x00,
+  0x00,0x00,0xFF,0xFF,0x00,0x00,
+  0x00,0x00,0x00,0x00,0xFF,0xFF
+};
+
+const uint8_t data[]={
+//some spirals
+	0x00, 0x00, 0x00, 0x00, 0xC7, 0x7F,  // slot 0
+	0x00, 0x00, 0x03, 0x00, 0xC7, 0x1D,  // slot 1
+	0x00, 0x84, 0x00, 0xE0, 0xC0, 0x1D,  // slot 2
+	0x00, 0xC0, 0x50, 0xE0, 0xC0, 0x18,  // slot 3
+	0x07, 0xCA, 0x0C, 0x03, 0x00, 0x00,  // slot 4
+	0xC7, 0xFA, 0x00, 0x00, 0x00, 0x00,  // slot 5
+	0xC7, 0xFE, 0x00, 0x00, 0x00, 0x00,  // slot 6
+	0xC7, 0xFE, 0x00, 0x00, 0x00, 0x00,  // slot 7
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 8
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 9
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 10
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 11
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 12
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 13
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // slot 14
+};
+
 const uint8_t *dummy;
 
 void loop() {
@@ -61,13 +94,13 @@ void loop() {
   while(1) {
     time= micros();
     for(i=0; i<1000; i++) {
-      flash_series(on_off,2,0);
-      digitalWrite(LATCH,HIGH);
-      digitalWrite(LATCH,LOW);
+      flash_series(data,sizeof(data)/SPI_BYTES,100);
     }
+    /*
     Serial.print("1000 executions in "); 
     Serial.print(micros()-time);
     Serial.println(" us");
+    */
   }
 }
 

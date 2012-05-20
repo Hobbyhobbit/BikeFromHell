@@ -9,9 +9,34 @@ class Prototype1Serializer {
   // maps [CAT][LED][0=R,1=G,2=B] to LED1..LED16 (NOT starting at zero !)
   // CAT=0 is for weak currents ("A")
   // CAT=1 is for more current  ("B")
+  // CAT=2 is for even more current  ("B")
   // LEDs numbered top->down (with USB connector below)
   // => 16bit will be shifted MSB, A before B
-  int maps[][][]= {
+  int maps_prototype2[][][]= {
+    
+    // not found : 7,11,12,19,20,31,32,43,44
+    
+   {{1,2,0},
+    {4,5,3},
+    {15,14,6},
+    {-1,-1,13},
+    {9,8,10}},
+
+   {{29,28,30},
+    {26,25,27},
+    {16,17,24},
+    {-1,-1,18},
+    {22,23,21}},
+    
+   {{34,35,33},
+    {37,38,36},
+    {47,46,39},
+    {-1,-1,45},
+    {41,40,42}},
+  };
+  
+  //TODO test prototype1 compatability
+  int maps_prototype1[][][]= {
     
    {{1,2,3},
     {4,5,6},
@@ -25,9 +50,13 @@ class Prototype1Serializer {
     {6,5,4},
     {3,2,1}} // last row not tested
   };
+  
+  int maps[][][]= maps_prototype2;
+  int wordlength= 6; // in bytes
+  
   // when value is GREATER (not equal!) than lims[bit], the corresponding
   // channel will be activated
-  int lims[]= {0,0x80};
+  int lims[]= {0,85,170,255};
   
   Prototype1Serializer(int baud) {
      if (Serial.list().length == 0) {
@@ -139,8 +168,14 @@ class Prototype1Serializer {
     }
   }
   
+  void set_bit(int[] buf,int slot,int pos) {
+    if (pos < 0)
+      return; // "-1" means "not found"
+    buf[ (wordlength-1-pos/8) + wordlength*slot ] |= 1<<(pos%8); // MSB first !!
+  }
+  
   void flash(LedMatrix lm,final int n,int ms) {
-    println("led(0)>>16=" + String.format("0x%02X",(lm.getColor(0,0)>>16) & 0xFF));
+//??    println("led(0)>>16=" + String.format("0x%02X",(lm.getColor(0,0)>>16) & 0xFF));
     if (flashing) {
       println("*** still flashing");
       return;
@@ -149,34 +184,37 @@ class Prototype1Serializer {
       println("*** cannot flash : no device connected");
       return;
     }
-    
-    // n slots times number of channels times two (16bit)
-    int vals[]= new int[2*maps.length*n];
-    for(int i=0; i<n; i++) {
-      int val[]= {0,0};
+
+    int vals[]= new int[wordlength*n];
+    for(int slot=0; slot<n; slot++) {
       
-      for(int j=0; j<lm.getLeds(); j++) {
-        color c= lm.getColor(j,((float) i)/n);
-        for(int bit=0; bit<val.length; bit++) {
+      for(int led=0; led<lm.getLeds(); led++) {
+        
+        color c= lm.getColor(led,((float) slot)/n);
+        for(int bit=0; bit<lims.length; bit++) {
           
           //red
-          if (((c>>16) & 0xFF) >lims[bit])
-            val[bit] |= (1 << (maps[bit][j][0] -1));
+          if (((c>>16) & 0xFF) >lims[bit] && lims[bit+1] > ((c>>16) & 0xFF))
+            set_bit(vals,slot,maps[bit][led][0]);
           
           //green
-          if (((c>> 8) & 0xFF) >lims[bit])
-            val[bit] |= (1 << (maps[bit][j][1] -1));
+          if (((c>> 8) & 0xFF) >lims[bit] && lims[bit+1] > ((c>>8) & 0xFF))
+            set_bit(vals,slot,maps[bit][led][1]);
             
           //blue
-          if (((c>> 0) & 0xFF) >lims[bit])
-            val[bit] |= (1 << (maps[bit][j][2] -1));
+          if (((c>> 0) & 0xFF) >lims[bit] && lims[bit+1] > ((c>>0) & 0xFF))
+            set_bit(vals,slot,maps[bit][led][2]);
         }
       }
-      // fill in MSB
-      for(int bit=0; bit<val.length; bit++) {
-        vals[2*maps.length*i+2*bit   ]= (val[bit]&0xFF00)>>8;
-        vals[2*maps.length*i+2*bit +1]=  val[bit]&0x00FF;
-      }
+    }
+    
+    // also write values for copy'n'paste into arduino sketch
+    print("\n\n");
+    for(int slot=0; slot<n; slot++) {
+      print("\t");
+      for(int j=0; j<wordlength; j++)
+        print( String.format("0x%02X, ",vals[slot*wordlength+j]) );
+      print(" // slot "+slot+"\n");
     }
     
     // ship the values
