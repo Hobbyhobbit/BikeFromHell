@@ -15,6 +15,9 @@ on required hardware, implementation details, design guidelines etc...
    parts.rst
    speed.rst
    bluetooth.rst
+   userinterface.rst
+   prototypes.rst
+   energy.rst
    notes.rst
 
 

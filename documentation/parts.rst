@@ -195,4 +195,8 @@ LEDs
 ----
 
   - :download:`multiled datasheet <datasheets/Multiled.pdf>`
+  - :download:`multiled datasheet <datasheets/ASMT-YTC2.pdf>`
+
+    - 120 degree viewing angle
+    - max DC current 50 mA (peak 100 mA), recommended 20 mA
 
