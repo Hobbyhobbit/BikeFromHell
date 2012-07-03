@@ -1,0 +1,10 @@
+
+generate layout from schema (generates XXX.net and XXX.pcb)
+  gschem2pcb -d ../footprints XXX.sch
+
+pfc.py "compiles" .pfp files to PCB footprints (.fp)
+
+cnc_mult.pl was used to change .cnc file units; because
+on some milling machines holes were totally off with the
+PCB generated layout files...
+
