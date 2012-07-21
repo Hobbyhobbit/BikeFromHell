@@ -2,15 +2,17 @@
 
 #include <SPI.h>
 
-#define LATCH 9
+#define LATCH 9 
 
-void __cxa_pure_virtual() {}
+//void __cxa_pure_virtual() {}
 
 int pos=0;
 int i;
 
 void setup() {
   SPI.begin();
+  // we are SO msb
+  SPI.setBitOrder(MSBFIRST);
 
 //  pinMode(LATCH,OUTPUT);
 
@@ -18,8 +20,6 @@ void setup() {
     SPI.transfer(0);
 
   Serial.begin(9600);
-
-  while(1);
 }
 
 ///////////////////////// test mapping
@@ -42,13 +42,17 @@ void loop() {
     if (pos<10) Serial.print(" ");
     Serial.print(pos);
     Serial.print(" : ");
-    for(i=0; i<pos/8; i++) {
+    // empty MSB bytes
+    for(i=0; i<5-pos/8; i++) {
       SPI.transfer(0);
       Serial.write("00");
     }
+    // byte containing one bit
+    if (1<<(pos%8) < 0x10) Serial.print("0");
     Serial.print( 1<<(pos%8),16);
     SPI.transfer( 1<<(pos%8) );
-    for(i=0; i<5-pos/8; i++) {
+    // empty LSB bytes
+    for(i=0; i<pos/8; i++) {
       SPI.transfer(0);
       Serial.write("00");
     }

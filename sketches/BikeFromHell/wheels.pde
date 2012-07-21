@@ -194,7 +194,7 @@ class ImageWheel extends WheelControl {
     
     // draw wheel contour
     stroke(#505050);
-//  strokeWeight(3);
+    strokeWeight(3);
     noFill();
     ellipse(0,0,r*2,r*2);
 

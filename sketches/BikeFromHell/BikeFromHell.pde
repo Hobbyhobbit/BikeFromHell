@@ -1,9 +1,8 @@
-
 import controlP5.*;
 
 int things= 1;
 int leds= 5;
-int resolution= 10; // slots per turn
+int resolution= 15; // slots per turn
 //int leds= 16;
 //int resolution= 100; // slots per turn
 float kmh= 10f; // bicycle speed
@@ -35,9 +34,9 @@ void setup() {
   size(800,400);
   cp5= new ControlP5(this);
   // general parameters
-  cp5.addSlider("kmh"  ,0f,30f, 20,100,10,100);
-  cp5.addSlider("smear",0f, 1f,  70,100,10,100);
-  cp5.addSlider("delta",0f,.2f, 120,100,10,100);
+  cp5.addSlider("kmh"  ,0f,30f, 560,100,10,100);
+  cp5.addSlider("smear",0f, 1f, 600,100,10,100);
+  cp5.addSlider("delta",0f,.2f, 640,100,10,100);
   
   // file controls
   // won't work in applet
@@ -51,9 +50,7 @@ void setup() {
   }
   
   // color pickers
-  colorSlider("ledRed"  ,#FF0000,  0,290,60,10);
-  colorSlider("ledGreen",#00FF00, 80,290,60,10);
-  colorSlider("ledBlue" ,#0000FF,160,290,60,10);
+  cp = new ColorPicker( 20, 60, 200, 200, 255 );
   
   // led matrix
   matrix= new LedMatrix("ledCode",ledMax,resolution,leds,0,300,800,100);
@@ -100,7 +97,8 @@ void draw() {
     matrix.setInteract(true);
   }
   
-  // draw matrix in both cases
+  // draw matrix and colorpicker in both cases
+  cp.render();
   matrix.draw();
   
   // calculate frame count and do speed->pos conversion

@@ -20,7 +20,7 @@ ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 FORMAT = ihex
 
 # Program settings
-AVR_TOOLS_PATH=/usr/bin
+AVR_TOOLS_PATH=/usr/local/CrossPack-AVR/bin
 CC = $(AVR_TOOLS_PATH)/avr-gcc
 CXX = $(AVR_TOOLS_PATH)/avr-g++
 OBJCOPY = $(AVR_TOOLS_PATH)/avr-objcopy
@@ -34,10 +34,10 @@ MV = mv -f
 
 
 ### for programming
-PORT = /dev/ttyUSB0
+PORT = /dev/tty.usbserial-A600ad00
 UPLOAD_RATE = 57600
 AVRDUDE_PROGRAMMER = stk500v1
-PYTHON = /usr/bin/python2
+PYTHON = /usr/bin/python
 PULSEDTR = $(PYTHON) $(dir $(firstword $(MAKEFILE_LIST)))../pulsedtr.py
 AVRDUDE_PORT = $(PORT)
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
