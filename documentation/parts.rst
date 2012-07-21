@@ -190,6 +190,10 @@ interrupts :
   - SR must be (re-) stored in ISR
   - timing : 4+3 instructions before ISR execution, 4 instructions on return
 
+SPI
+
+  - maximum speed : ``f_osc/4`` in slave mode and ``f_osc/2`` in master mode
+    (when ``SPI2X`` double speed bit is set logic one)
 
 LEDs
 ----

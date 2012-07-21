@@ -1,5 +1,5 @@
 
-TARGET=blink
+TARGET=test_uart_oracle
 
 # goto __END__
 
@@ -120,6 +120,11 @@ test_timer.elf: test_timer.o flash.o timer.o
 
 test_uart_link.elf: test_uart_link.o uart.o
 	$(CC) -o $@ $(ALL_CFLAGS) $(LDFLAGS) $^
+
+test_uart_oracle.elf: test_uart_oracle.o uart.o
+	$(CC) -o $@ $(ALL_CFLAGS) $(LDFLAGS) $^
+
+
 
 upload: $(TARGET).hex
 	$(PULSEDTR) $(PORT)
