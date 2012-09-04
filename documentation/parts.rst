@@ -214,9 +214,21 @@ SPI
 LEDs
 ----
 
-  - :download:`multiled datasheet <datasheets/Multiled.pdf>`
-  - :download:`multiled datasheet <datasheets/ASMT-YTC2.pdf>`
+  - :download:`LRTB G6TG (OSRAM) <datasheets/LRTBG6TG.pdf>`
+  - :download:`ASMT-YTC2 (avago) <datasheets/ASMT-YTC2.pdf>`
 
     - 120 degree viewing angle
     - max DC current 50 mA (peak 100 mA), recommended 20 mA
+
+  - :download:`OVSRRGBCC3 (OPTEK) <datasheets/OVSRRGBCC3.pdf>`
+
+Hall sensors
+------------
+
+:download:`TLE49X5 (Siemens) <datasheets/TLE49X5.pdf>`
+
+  - with schmitt triggers
+  - open collector output
+  - ``TLE4905`` switches between 0 // 10 mT
+  - ``TLE4935`` switches between -10 // +10 mT
 
