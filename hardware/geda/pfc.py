@@ -2,7 +2,9 @@
 # defaults; use set('...',value) to change
 padwidth = 30
 clearance = 30
+thickness = 60
 mask = 50
+drill = 38
 
 # sets variable for use in arguments
 def set(name,value):
@@ -42,14 +44,41 @@ def Pads(i0,n,x1,y1,x2,y2,dx,dy):
 
     return ret
 
+# make serie of pins
+#  - start with coordinates specified
+#  - add (dx,dy) for consecutive pads
+#  - update pad-name accordingly to (i0, ..., i0+n-1)
+def Pins(i0,n,x1,y1,dx,dy):
+    ret= ''
+    for i in range(n):
+
+        # x1 y1 x2 y2 width clearance mask
+        # 0x100 : rectangular, 0x800 octagon -- default round
+        # note that clearance, width, mask will appear 50% _on each side_
+        if i+i0==1:
+            flags= '0x00000101'
+        else:
+            flags= '0x00000001'
+
+        ret+= 'Pin(%5d %5d %d %d %d %d "pin %d" "%d" %s)\n'%(
+                x1+i*dx,y1+i*dy,
+                thickness, clearance,mask,drill,
+                i+i0,i+i0,
+                flags
+            )
+
+    return ret
+
 
 
 ################# "parser"
 
-import argparse
-parser = argparse.ArgumentParser(description='PCB Footprint Compiler -- write geda-PCB footprints without (so much) pain')
-parser.add_argument('template',nargs='+',help='PCB footprint "source" file; extension will be replaced with ".fp"')
-args= parser.parse_args()
+import sys
+if False:
+    import argparse
+    parser = argparse.ArgumentParser(description='PCB Footprint Compiler -- write geda-PCB footprints without (so much) pain')
+    parser.add_argument('template',nargs='+',help='PCB footprint "source" file; extension will be replaced with ".fp"')
+    args= parser.parse_args()
 
 
 import re
@@ -58,7 +87,7 @@ command_re = re.compile('\\s*!(\\w+\\s*\(.*\))')
 metrics_re = re.compile('(\\d+(\\.\\d*)?|\\.\\d+)\\s*mm')
 
 
-for fname in args.template:
+for fname in sys.argv[1:]:
     
     with open(fname,'r') as f:
 
@@ -67,7 +96,7 @@ for fname in args.template:
             for l in f.readlines():
 
                 if comment_re.match(l):
-                    next
+                    continue
                 l= re.sub(metrics_re,lambda x:str(int(39.37*float(x.group(1)))),l)
                 m= command_re.match(l)
                 if m: l= eval(m.group(1))
