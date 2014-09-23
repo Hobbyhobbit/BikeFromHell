@@ -102,6 +102,19 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 html_theme = 'default'
 
+# on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org¬
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+if not on_rtd:  # only import and set the theme if we're building docs locally
+    try:
+        import sphinx_rtd_theme
+        html_theme = 'sphinx_rtd_theme'
+        html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+    except ImportError, e:
+        print('^[[4;31mfailed to import sphinx_rtd_theme^[[m')
+        print('you can get it in cheeseshop')
+        print('$ [1mpip install[m sphinx_rtd_theme')
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
