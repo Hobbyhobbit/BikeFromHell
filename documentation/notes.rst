@@ -53,7 +53,8 @@ The following plot shows some possible values where each CAT4016
 can be fine-tuned with a potentiometer to manually set a precise
 current that fulfills the above-mentioned criteria.
 
-.. plot:: scripts/CAT4016_prototype2_currents.py
+..
+  plot:: scripts/CAT4016_prototype2_currents.py
 
 
 Why Not Sell it?

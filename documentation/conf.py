@@ -30,7 +30,7 @@ extensions = [
     'sphinx.ext.pngmath', 
     'sphinx.ext.ifconfig', 
     'sphinx.ext.viewcode',
-    'matplotlib.sphinxext.plot_directive',
+#    'matplotlib.sphinxext.plot_directive',
 ]
 
 # showo todo list
