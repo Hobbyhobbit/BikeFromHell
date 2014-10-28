@@ -1,0 +1,8 @@
+
+include ../Makefile
+
+PART=atmega168
+PROGRAMMER=arduino
+BAUDRATE=19200
+MOREAVRFLAGS=-V
+

@@ -1,0 +1,18 @@
+
+
+simple GNU Makefile collection to compile and upload C programs
+to different AVR prototype boards
+
+    1. create sub-directory containing sources (only one level!)
+    2. create Makefile in sub-directory
+    3. define TARGET= and SOURCES= at the top of your Makefile
+    3. include appropriate Makefile in the parent-directory
+    4. make clean; make && make upload
+
+
+example Makefile::
+
+    TARGET=flashme
+    SOURCES=main.c utility.c
+    include ../Makefile.uno
+

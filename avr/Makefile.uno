@@ -1,0 +1,8 @@
+
+include ../Makefile
+
+PART=atmega328p
+PROGRAMMER=stk500v1
+BAUDRATE=115200
+MOREAVRFLAGS=-V
+
