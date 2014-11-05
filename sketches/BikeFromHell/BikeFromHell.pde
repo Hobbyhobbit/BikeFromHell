@@ -1,8 +1,9 @@
+
 import controlP5.*;
 
 int things= 1;
 int leds= 5;
-int resolution= 15; // slots per turn
+int resolution= 10; // slots per turn
 //int leds= 16;
 //int resolution= 100; // slots per turn
 float kmh= 10f; // bicycle speed
@@ -50,7 +51,10 @@ void setup() {
   }
   
   // color pickers
-  cp = new ColorPicker( 20, 60, 200, 200, 255 );
+//  cp = new ColorPicker( 20, 60, 200, 200, 255 );
+  colorSlider("ledRed"  ,#FF0000,  0,290,60,10);
+  colorSlider("ledGreen",#00FF00, 80,290,60,10);
+  colorSlider("ledBlue" ,#0000FF,160,290,60,10);
   
   // led matrix
   matrix= new LedMatrix("ledCode",ledMax,resolution,leds,0,300,800,100);
@@ -97,8 +101,8 @@ void draw() {
     matrix.setInteract(true);
   }
   
-  // draw matrix and colorpicker in both cases
-  cp.render();
+  // draw matrix in both cases
+//  cp.render();
   matrix.draw();
   
   // calculate frame count and do speed->pos conversion
