@@ -3,8 +3,20 @@
 About Speed
 ***********
 
-Loading Data into LEDs
-======================
+When riding at high velocities, the travelled distance of the outermost LED
+during one grayscale-PWM may exceed an acceptable resolution (~1cm).
+For :ref:`TLC5940`:
+Assuming a maximum speed of 30 km/h, given 16 MHz GSCLK and 4096 PWM steps,
+we get::
+
+    30/3.6 * 1/16e6 * 4096 = 2.13 mm
+
+as the distance between two full PWM cycles, neglecting the time for blanking.
+
+.. warning:: The following sections are deprecated
+
+Manual PWM for the :ref:`CAT4016`
+=================================
 
 It is crucial that data is loaded into the :ref:`CAT4016` shift
 register fast enough to realize the desired pictures. Especially, if
