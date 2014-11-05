@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<hardware>
+	<description></description>
+	<LEDs>5</LEDs>
+	<pinmap>
+		<led><r>1</r><g>2</g><b>3</b></led>
+		<led><r>4</r><g>5</g><b>6</b></led>
+		<led><r>1</r><g>2</g><b>3</b></led>
+		<led><r>1</r><g>2</g><b>3</b></led>
+		<led><r>1</r><g>2</g><b>3</b></led>
+	</pinmap>
+	<bitdepth>12</bitdepth>
+	<dotcorrection>
+		<led><r>1.000</r><g>1.000</g><b>1.000</b></led>
+		<led><r>1.000</r><g>1.000</g><b>1.000</b></led>
+		<led><r>1.000</r><g>1.000</g><b>1.000</b></led>
+		<led><r>1.000</r><g>1.000</g><b>1.000</b></led>
+		<led><r>1.000</r><g>1.000</g><b>1.000</b></led>
+	</dotcorrection>
+</hardware>
