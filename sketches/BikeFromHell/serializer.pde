@@ -56,7 +56,7 @@ class Prototype1Serializer {
   
   // when value is GREATER (not equal!) than lims[bit], the corresponding
   // channel will be activated
-  int lims[]= {0,85,170,255};
+  int lims[]= {60,125,220,1000};
   
   Prototype1Serializer(int baud) {
      if (Serial.list().length == 0) {
@@ -191,7 +191,7 @@ class Prototype1Serializer {
       for(int led=0; led<lm.getLeds(); led++) {
         
         color c= lm.getColor(led,((float) slot)/n);
-        for(int bit=0; bit<lims.length; bit++) {
+        for(int bit=0; bit<lims.length -1; bit++) {
           
           //red
           if (((c>>16) & 0xFF) >lims[bit] && lims[bit+1] > ((c>>16) & 0xFF))
