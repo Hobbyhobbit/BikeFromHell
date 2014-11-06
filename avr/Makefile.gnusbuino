@@ -4,4 +4,5 @@ include ../Makefile
 PART=atmega644p
 PROGRAMMER=usbasp
 BAUDRATE=38400
+BOARD=gnusbuino
 

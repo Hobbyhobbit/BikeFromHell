@@ -3,8 +3,9 @@
 
 ## project specific; TARGET is name of product (without extension)
 ## SOURCES are .c files used to compile TARGET
-#TARGET=
-#SOURCES=
+## define these values BEFORE including the makefile
+TARGET := $(TARGET)
+SOURCES := $(SOURCES)
 
 ## where to find executables -- this setup uses avrdude installed
 ## locally and the other tools from the default OSX installation
@@ -18,15 +19,17 @@ SIZE=$(AVRBASE)/bin/avr-size
 
 ## board specific settings -- best to write a "Makefile.board" that
 ## defines these values and includes the current Makefile
+## make sure to re-define these values AFTER including the makefile
 ## alternatively, these can also be overriden on the command line
 ## $ make FREQ=8000000 PART=atmega328p
 FREQ=16000000
-PART=
 MODEM=/dev/tty.usb*
+PART=
+BOARD=
 PROGRAMMER=
 BAUDRATE=
 
-CFLAGS=-I$(INCLUDEDIR) -DF_CPU=$(FREQ) -mmcu=$(PART) -Os -Wall
+CFLAGS=-I$(INCLUDEDIR) -I. -DF_CPU=$(FREQ) -DBOARD_$(BOARD) -mmcu=$(PART) -Os -Wall
 LDFLAGS=-lm
 AVRFLAGS=-v -p $(PART) -P $(MODEM) -c $(PROGRAMMER) -b $(BAUDRATE)
 MOREAVRFLAGS=
@@ -36,8 +39,7 @@ MOREAVRFLAGS=
 all: $(TARGET).hex
 
 
-#$(TARGET).elf: $(addsuffix .o, $(basename $(SOURCES)))
-$(TARGET).elf: $(OBJECTS)
+$(TARGET).elf: $(addsuffix .o, $(basename $(SOURCES)))
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 %.hex: %.elf
@@ -45,7 +47,7 @@ $(TARGET).elf: $(OBJECTS)
 	$(SIZE) --target=ihex $@
 
 upload: $(TARGET).hex
-	$(AVRDUDE) $(AVRFLAGS) $(MOREAVRFLAGS) -U flash:w:$@:i
+	$(AVRDUDE) $(AVRFLAGS) $(MOREAVRFLAGS) -U flash:w:$<:i
 
 clean:
 	rm *.elf *.hex *.o
